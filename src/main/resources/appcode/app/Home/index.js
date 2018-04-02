@@ -36,22 +36,20 @@ export class HomeComponent extends React.Component {
     }
     handleNext() {
         const input = this.props;
-        debugger;
-        let pageOneObj = this.childOne.getChildState();
-
-        if (this.pageOneObj != undefined) {
+        if (this.childOne != undefined) {
+            let pageOneObj = this.childOne.getChildState();            
             this.setState({ serverName: pageOneObj.serverName });
             this.setState({ userName: pageOneObj.userName });
             this.setState({ dataBaseName: pageOneObj.dataBaseName });
+            input.dispatch(printDetails(this.state));            
         }
-
         if (this.childTwo != undefined) {
             let pageTwoObj = this.childTwo.getChildState();
             this.setState({ portNumber: pageTwoObj.portNumber });
             this.setState({ password: pageTwoObj.password });
+            input.dispatch(printDetails(this.state));            
         }
 
-        input.dispatch(printDetails(this.state));
         const { stepIndex } = this.state;
         this.setState({
             stepIndex: stepIndex + 1,
@@ -78,8 +76,7 @@ export class HomeComponent extends React.Component {
             headers: headers,
             body: JSON.stringify(this.state)
         }).then(resposemap => {
-            debugger;
-            console.log("hello");
+            this.state.statusBar = "hide";                        
         });
     }
     handlePrev() {

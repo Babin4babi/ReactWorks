@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,9 @@ import com.example.pojo.ConnectionMapper;
 @RestController
 public class SqlRestController {
 	
+	@Value("${spring.datasource.driver-class-name}")
+	private String driverName="";
+	
 	@RequestMapping(value = "postMappingData.do", method = RequestMethod.POST)
 	public Map testConnection(@RequestBody ConnectionMapper connectionMapper) {
 		boolean connection = true;
@@ -22,7 +26,7 @@ public class SqlRestController {
 		try {
 			String connectionUrl = getConnectionUrl(connectionMapper.getDataBaseName(),
 					connectionMapper.getPortNumber());
-			Class.forName(connectionUrl);
+			Class.forName(driverName);
 			DriverManager.getConnection(connectionUrl, connectionMapper.getUserName(), connectionMapper.getPassword());
 		} catch (ClassNotFoundException | SQLException e) {
 			connection = false;

@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>MyApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>demo</name>
+	<name>MyApp</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -58,23 +58,22 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
+			<!--<plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <!-- here the phase you need -->
                         <phase>install</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/classes</outputDirectory>   <!-- output directory -->
+                            <outputDirectory>${basedir}/target/classes</outputDirectory>  
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/resources</directory>    <!-- source directory -->
+                                    <directory>${basedir}/src/main/resources</directory>    
                                     <filtering>true</filtering>
-                                    <excludes>      <!--Those files will be excluded-->
+                                    <excludes>      
                                         <exclude>**/node_modules/**</exclude>
                                         <exclude>**/node/**</exclude>
                                     </excludes>
@@ -83,7 +82,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 			
 			<!-- Frontend -->
 			<plugin>
@@ -123,7 +122,7 @@
 				</executions>
 			</plugin>
 			<!-- /Frontend -->
-			<plugin>
+			<!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
@@ -144,8 +143,18 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 		</plugins>
+		 <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>appcode/node_modules/**</exclude>
+                    <exclude>appcode/node/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
 
 	</build>
 
